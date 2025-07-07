@@ -1,6 +1,4 @@
-import { PlusIcon } from 'lucide-react';
-
-import { Button } from '@/shared/ui/button';
+import { CreateNoteButton } from '@/features/note';
 
 export function NoteSidebar({ notes }: { notes: React.ReactNode }) {
   return (
@@ -8,9 +6,7 @@ export function NoteSidebar({ notes }: { notes: React.ReactNode }) {
       <div className="border-b border-gray-200 p-4">
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-semibold text-gray-800">Заметки</h1>
-          <Button variant="ghost" size="icon">
-            <PlusIcon />
-          </Button>
+          <CreateNoteButton />
         </div>
       </div>
       <div className="flex-1 overflow-y-auto">{notes}</div>
