@@ -1,16 +1,17 @@
 import { useParams } from 'wouter';
 
+import { Textarea } from '@/shared/ui/textarea';
+
 export function MarkdownEditor() {
   const { id } = useParams();
 
   console.log(id);
 
   return (
-    <div className="flex-1 overflow-y-auto p-4">
-      <textarea
-        className="h-full w-full resize-none bg-transparent font-mono focus:outline-none"
-        placeholder="Начните писать..."
-      />
-    </div>
+    <Textarea
+      name="markdown-editor"
+      className="h-full w-full resize-none rounded-2xl border-none bg-white p-4 font-mono focus:ring-0 focus:outline-none focus-visible:ring-0"
+      placeholder="Начните писать..."
+    />
   );
 }

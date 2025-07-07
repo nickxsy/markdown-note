@@ -1,3 +1,9 @@
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup
+} from '@/shared/ui/resizable';
+
 export function NoteLayout({
   header,
   editor,
@@ -12,8 +18,15 @@ export function NoteLayout({
       <div className="flex flex-1 flex-col">
         {header}
         <div className="flex flex-1">
-          {editor}
-          {preview}
+          <ResizablePanelGroup direction="horizontal">
+            <ResizablePanel>
+              <div className="h-full w-full p-2">{editor}</div>
+            </ResizablePanel>
+            <ResizableHandle />
+            <ResizablePanel>
+              <div className="h-full w-full p-2">{preview}</div>
+            </ResizablePanel>
+          </ResizablePanelGroup>
         </div>
       </div>
     </div>
