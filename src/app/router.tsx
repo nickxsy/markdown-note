@@ -3,15 +3,17 @@ import { Redirect, Route, Switch } from 'wouter';
 import { HomePage } from '@/pages/home';
 import { NotePage } from '@/pages/note';
 
-export function RouterProvider() {
+import { ROUTES } from '@/shared/model/routes';
+
+export function AppRouter() {
   return (
     <>
       <Switch>
-        <Route path="/" component={HomePage} />
-        <Route path={`/note/:id`} component={NotePage} />
+        <Route path={ROUTES.HOME} component={HomePage} />
+        <Route path={ROUTES.NOTE} component={NotePage} />
 
         {/* Redirect to home page if no route is found */}
-        <Redirect to="/" />
+        <Redirect to={ROUTES.HOME} replace />
       </Switch>
     </>
   );
