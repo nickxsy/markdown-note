@@ -1,6 +1,6 @@
 import { NoteList, NoteSidebar } from '@/pages/note';
 
-import { RouterProvider } from './router';
+import { AppRouter } from './router';
 
 const notes = [
   {
@@ -21,7 +21,7 @@ export function App() {
       <NoteSidebar notes={<NoteList notes={notes} />} />
 
       <div className="flex-1">
-        <RouterProvider />
+        <AppRouter />
       </div>
     </div>
   );
