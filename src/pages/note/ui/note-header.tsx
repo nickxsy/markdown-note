@@ -1,7 +1,6 @@
-import { TrashIcon } from 'lucide-react';
-
-import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
+
+import { RemoveNoteButton } from '@/features/note';
 
 export function NoteHeader() {
   return (
@@ -12,13 +11,7 @@ export function NoteHeader() {
           className="w-full bg-transparent text-xl font-semibold focus:outline-none"
         />
       </div>
-      <Button
-        variant="secondary"
-        size="icon"
-        className="rounded-full text-red-500"
-      >
-        <TrashIcon />
-      </Button>
+      <RemoveNoteButton />
     </div>
   );
 }
