@@ -17,6 +17,7 @@ export type NotePartial = {
 export type CreateNoteData = {
   id: string;
   title: string;
+  content: string;
   updatedAt: string;
   createdAt: string;
 };
@@ -29,4 +30,11 @@ export type UpdateNoteData = {
 
 export type DeleteNoteData = {
   id: string;
+};
+
+export type NoteSchema = {
+  data: Note[];
+  isLoading: boolean;
+  isError: boolean;
+  error?: string;
 };

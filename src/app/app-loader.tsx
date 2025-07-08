@@ -9,6 +9,7 @@ export function AppLoader({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     Promise.all([dispatch(noteStore.actions.loadNotes())]).finally(() => {
       setIsLoading(false);
     });

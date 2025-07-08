@@ -1,26 +1,18 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
-import {
-  createAsyncThunk,
-  createSelector,
-  createSlice,
-  nanoid
-} from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 
 import { createBaseSelector, registerSlice } from '@/shared/lib/redux';
 
-import type { Note } from '@/entities/note';
+import { createNote } from './services/create-note';
+import { loadNotes } from './services/get-notes';
+import { removeNote } from './services/remove-note';
+import type { Note, NoteSchema } from './types';
 
-import { noteRepository } from './note.repository';
-import type { DeleteNoteData } from './types';
-
-const NOTE_DEFAULT_TITLE = 'Новая заметка';
-
-type NoteState = {
-  notes: Note[];
-};
-
-const initialState: NoteState = {
-  notes: []
+const initialState: NoteSchema = {
+  data: [],
+  isLoading: false,
+  isError: false,
+  error: undefined
 };
 
 export const noteSlice = createSlice({
@@ -28,61 +20,70 @@ export const noteSlice = createSlice({
   initialState,
   reducers: {
     setNote: (state, action: PayloadAction<{ notes: Note[] }>) => {
-      state.notes = action.payload.notes;
+      state.data = action.payload.notes;
     }
   },
   extraReducers: builder => {
-    builder.addCase(loadNotes.fulfilled, (state, action) => {
-      state.notes = action.payload;
-    });
-    builder.addCase(createNote.fulfilled, (state, action) => {
-      console.log('createNote.fulfilled', action.payload);
-      state.notes.push(action.payload);
-    });
+    builder
+      //  Load notes
+      .addCase(loadNotes.pending, state => {
+        state.isLoading = true;
+        state.isError = false;
+        state.error = undefined;
+      })
+      .addCase(loadNotes.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.error = action.error.message;
+      })
+      .addCase(loadNotes.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.isLoading = false;
+      })
+
+      //  Create note
+      .addCase(createNote.pending, state => {
+        state.isLoading = true;
+        state.isError = false;
+        state.error = undefined;
+      })
+      .addCase(createNote.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.error = action.error.message;
+      })
+      .addCase(createNote.fulfilled, (state, action) => {
+        state.data = [...state.data, action.payload];
+        state.isLoading = false;
+      })
+
+      //  Remove note
+      .addCase(removeNote.pending, state => {
+        state.isLoading = true;
+        state.isError = false;
+        state.error = undefined;
+      })
+
+      .addCase(removeNote.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.error = action.error.message;
+      })
+
+      .addCase(removeNote.fulfilled, (state, action) => {
+        state.data = state.data.filter(note => note.id !== action.payload.id);
+        state.isLoading = false;
+      });
   }
 });
 
 const noteBaseSelector = createBaseSelector(noteSlice);
 
-const selectNotes = createSelector(noteBaseSelector, s => s.notes);
+const selectNotes = createSelector(noteBaseSelector, s => s.data);
 
-const loadNotes = createAsyncThunk('notes/loadNotes', async () => {
-  const notes = await noteRepository.getNotes();
-  return notes;
-});
-
-const createNote = createAsyncThunk('notes/createNote', async () => {
-  const newNote = {
-    id: nanoid(),
-    title: NOTE_DEFAULT_TITLE,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
-  };
-
-  await noteRepository.createNote(newNote);
-  return newNote;
-});
-
-// const updateBoard = createAsyncThunk(
-//   "boards/updateBoard",
-//   async (data: UpdateBoardData) => {
-//     const board = await boardsRepository.getBoard(data.id);
-//     if (!board) {
-//       throw new Error();
-//     }
-//     const newBoard = { ...board, ...data };
-//     await boardsRepository.saveBoard(newBoard);
-//     return newBoard;
-//   },
-// );
-
-const removeNote = createAsyncThunk(
-  'notes/removeNote',
-  async (note: DeleteNoteData) => {
-    await noteRepository.removeNote(note);
-    return note;
-  }
-);
+const selectIsLoading = createSelector(noteBaseSelector, s => s.isLoading);
+const selectIsError = createSelector(noteBaseSelector, s => s.isError);
+const selectError = createSelector(noteBaseSelector, s => s.error);
 
 registerSlice([noteSlice]);
 
@@ -93,6 +94,9 @@ export const noteStore = {
     removeNote
   },
   selectors: {
-    selectNotes
+    selectNotes,
+    selectIsLoading,
+    selectIsError,
+    selectError
   }
 };

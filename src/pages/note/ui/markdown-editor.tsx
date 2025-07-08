@@ -1,12 +1,6 @@
-import { useParams } from 'wouter';
-
 import { Textarea } from '@/shared/ui/textarea';
 
 export function MarkdownEditor() {
-  const { id } = useParams();
-
-  console.log(id);
-
   return (
     <Textarea
       name="markdown-editor"

@@ -1,41 +1,74 @@
+import { CONIFG } from '@/shared/model/config';
+
 import type {
   CreateNoteData,
   DeleteNoteData,
-  Note,
   NotePartial,
   UpdateNoteData
 } from './types';
 
-const notes: Note[] = [
-  {
-    id: '1',
-    title: 'Note 1',
-    content: 'Content 1',
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
-  },
-  {
-    id: '2',
-    title: 'Note 2',
-    content: 'Content 2',
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
-  }
-];
-
 export const noteRepository = {
-  getNotes: () => {
-    return notes;
+  getNotes: async () => {
+    try {
+      const response = await fetch(`${CONIFG.API_URL}/notes`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch notes');
+      }
+
+      const data = await response.json();
+
+      return data;
+    } catch (error) {
+      console.error('Error fetching notes:', error);
+      return [];
+    }
   },
 
   getNote: (note: NotePartial) => {
-    return notes.find(n => n.id === note.id);
+    // TODO: implement
+    console.log('getNote', note);
   },
 
-  createNote: (note: CreateNoteData) => {
-    notes.push(note);
+  createNote: async (note: CreateNoteData) => {
+    try {
+      console.log('Creating note with data:', note);
+      console.log('API URL:', CONIFG.API_URL);
 
-    return note;
+      const response = await fetch(`${CONIFG.API_URL}/notes`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({
+          ...note,
+          content: note.content || '' // Убеждаемся, что content всегда определен
+        })
+      });
+
+      console.log('Response status:', response.status);
+      console.log('Response ok:', response.ok);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Server error response:', errorText);
+        throw new Error(
+          `Failed to create note: ${response.status} ${errorText}`
+        );
+      }
+
+      // Возвращаем созданную заметку, даже если сервер не вернул данные
+      return note;
+    } catch (error) {
+      console.error('Error creating note:', error);
+      throw error;
+    }
   },
 
   updateNote: (note: UpdateNoteData) => {
@@ -44,10 +77,22 @@ export const noteRepository = {
     return [];
   },
 
-  removeNote: (note: DeleteNoteData) => {
-    const index = notes.findIndex(n => n.id === note.id);
-    notes.splice(index, 1);
+  removeNote: async (note: DeleteNoteData) => {
+    console.log('removeNote', note);
 
-    return notes;
+    try {
+      const response = await fetch(`${CONIFG.API_URL}/notes/${note.id}`, {
+        method: 'DELETE'
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete note');
+      }
+
+      return note;
+    } catch (error) {
+      console.error('Error deleting note:', error);
+      throw error;
+    }
   }
 };

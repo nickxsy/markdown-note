@@ -14,7 +14,7 @@ export function NoteLayout({
   preview: React.ReactNode;
 }) {
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen">
       <div className="flex flex-1 flex-col">
         {header}
         <div className="flex flex-1">
