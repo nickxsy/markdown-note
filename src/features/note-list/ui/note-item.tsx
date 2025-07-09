@@ -37,7 +37,7 @@ export function NoteItem({ note }: { note: Note }) {
             )}
           </div>
           <div className="flex flex-col gap-2 text-xs text-gray-500">
-            <span>Дата создания: {createdAt}</span>
+            <span>{createdAt}</span>
             {isUpdated && <span>Последнее изменение: {updatedAt}</span>}
           </div>
         </div>

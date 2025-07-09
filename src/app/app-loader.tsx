@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import { PageLoader } from '@/widgets/page-loader';
+
 import { useAppDispatch } from '@/shared/lib/redux';
 
 import { noteStore } from '@/entities/note';
@@ -16,7 +18,7 @@ export function AppLoader({ children }: { children: React.ReactNode }) {
   }, [dispatch]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <PageLoader />;
   }
 
   return <>{children}</>;

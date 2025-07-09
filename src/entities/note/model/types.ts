@@ -25,7 +25,7 @@ export type CreateNoteData = {
 export type UpdateNoteData = {
   id: string;
   title: string;
-  content: string;
+  content?: string;
 };
 
 export type DeleteNoteData = {
@@ -34,6 +34,7 @@ export type DeleteNoteData = {
 
 export type NoteSchema = {
   data: Note[];
+  groupedData: Record<string, Note[]>;
   isLoading: boolean;
   isError: boolean;
   error?: string;

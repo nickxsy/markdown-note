@@ -1,11 +1,15 @@
 import { useParams } from 'wouter';
 
-import { Input } from '@/shared/ui/input';
+import { useAppSelector } from '@/shared/lib/redux';
 
-import { RemoveNoteButton } from '@/features/note';
+import { noteStore } from '@/entities/note';
+
+import { InputTitleNote, RemoveNoteButton } from '@/features/note';
 
 export function NoteHeader() {
   const { id } = useParams();
+  const notes = useAppSelector(noteStore.selectors.selectNotes);
+  const note = notes.find(note => note.id === id);
 
   if (!id) {
     return null;
@@ -14,10 +18,7 @@ export function NoteHeader() {
   return (
     <div className="flex items-center justify-between border-b border-gray-200 bg-white p-4">
       <div className="flex-1">
-        <Input
-          type="text"
-          className="w-full bg-transparent text-xl font-semibold focus:outline-none"
-        />
+        <InputTitleNote id={id} initialTitle={note?.title} />
       </div>
       <RemoveNoteButton id={id} />
     </div>

@@ -1,4 +1,6 @@
-import { NoteList, NoteSidebar } from '@/pages/note';
+import { NoteSidebar } from '@/pages/note';
+
+import { NoteList } from '@/features/note-list';
 
 export function RootLayout({ children }: { children: React.ReactNode }) {
   return (

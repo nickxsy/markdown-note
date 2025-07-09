@@ -1,4 +1,4 @@
-import { CONIFG } from '@/shared/model/config';
+import { CONIFG } from '@/shared/const/config';
 
 import type {
   CreateNoteData,
@@ -10,12 +10,15 @@ import type {
 export const noteRepository = {
   getNotes: async () => {
     try {
-      const response = await fetch(`${CONIFG.API_URL}/notes`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
+      const response = await fetch(
+        `${CONIFG.API_URL}/notes?_sort=createdAt&_order=desc`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
         }
-      });
+      );
 
       if (!response.ok) {
         throw new Error('Failed to fetch notes');
@@ -30,16 +33,24 @@ export const noteRepository = {
     }
   },
 
-  getNote: (note: NotePartial) => {
-    // TODO: implement
-    console.log('getNote', note);
+  getNoteById: async (note: NotePartial) => {
+    try {
+      const response = await fetch(`${CONIFG.API_URL}/notes/${note.id}`);
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch note');
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching note:', error);
+      return null;
+    }
   },
 
   createNote: async (note: CreateNoteData) => {
     try {
-      console.log('Creating note with data:', note);
-      console.log('API URL:', CONIFG.API_URL);
-
       const response = await fetch(`${CONIFG.API_URL}/notes`, {
         method: 'POST',
         headers: {
@@ -47,13 +58,9 @@ export const noteRepository = {
           Accept: 'application/json'
         },
         body: JSON.stringify({
-          ...note,
-          content: note.content || '' // Убеждаемся, что content всегда определен
+          ...note
         })
       });
-
-      console.log('Response status:', response.status);
-      console.log('Response ok:', response.ok);
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -71,15 +78,30 @@ export const noteRepository = {
     }
   },
 
-  updateNote: (note: UpdateNoteData) => {
-    console.log('createNote', note);
-    // TODO: implement
-    return [];
+  updateNoteTitle: async (note: UpdateNoteData) => {
+    try {
+      const response = await fetch(`${CONIFG.API_URL}/notes/${note.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          title: note.title
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update note');
+      }
+
+      return note;
+    } catch (error) {
+      console.error('Error updating note:', error);
+      throw error;
+    }
   },
 
   removeNote: async (note: DeleteNoteData) => {
-    console.log('removeNote', note);
-
     try {
       const response = await fetch(`${CONIFG.API_URL}/notes/${note.id}`, {
         method: 'DELETE'

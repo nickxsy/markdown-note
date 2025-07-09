@@ -5,7 +5,7 @@ import { NotePage } from '@/pages/note';
 
 import { RootLayout } from '@/widgets/root-layout';
 
-import { ROUTES } from '@/shared/model/routes';
+import { ROUTES } from '@/shared/const/routes';
 
 export function AppRouter() {
   return (

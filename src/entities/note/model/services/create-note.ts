@@ -1,4 +1,5 @@
 import { createAsyncThunk, nanoid } from '@reduxjs/toolkit';
+import { navigate } from 'wouter/use-browser-location';
 
 import { noteRepository } from '../note.repository';
 
@@ -14,6 +15,8 @@ export const createNote = createAsyncThunk('notes/createNote', async () => {
   };
 
   const response = await noteRepository.createNote(newNote);
+
+  navigate(`/note/${response.id}`);
 
   return response;
 });

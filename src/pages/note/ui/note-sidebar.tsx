@@ -1,14 +1,10 @@
-import { ScrollArea } from '@/shared/ui/scroll-area';
-
 import { CreateNoteButton } from '@/features/note';
 
 export function NoteSidebar({ notes }: { notes: React.ReactNode }) {
   return (
     <div className="flex w-[320px] flex-col">
       <NoteSidebarHeader />
-      <div className="flex-1 overflow-hidden p-2">
-        <ScrollArea className="h-full rounded-2xl bg-white">{notes}</ScrollArea>
-      </div>
+      <div className="flex-1 overflow-hidden p-2">{notes}</div>
     </div>
   );
 }
