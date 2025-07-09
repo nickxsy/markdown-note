@@ -2,6 +2,7 @@ import { useRoute } from 'wouter';
 import { navigate } from 'wouter/use-browser-location';
 
 import { cn } from '@/shared/lib/css';
+import { Typography } from '@/shared/ui/typography';
 
 import type { Note } from '@/entities/note';
 
@@ -22,7 +23,7 @@ export function NoteItem({ note }: { note: Note }) {
           navigate(`/note/${note.id}`);
         }}
         className={cn(
-          'group flex w-full cursor-pointer flex-col px-4 py-[2px] text-left',
+          'group flex w-full cursor-pointer flex-col px-4 py-[2px] text-left outline-none',
           {
             'pointer-events-none': isActive
           }
@@ -30,21 +31,37 @@ export function NoteItem({ note }: { note: Note }) {
       >
         <div
           className={cn(
-            'rounded-2xl border-2 border-transparent bg-gray-100 p-5 transition-colors group-hover:bg-gray-200',
+            'flex flex-col gap-[6px] rounded-2xl border-2 border-transparent bg-gray-100 p-[14px] transition-colors group-hover:bg-gray-200 group-focus:border-blue-300',
             {
-              'pointer-events-none border-blue-500': isActive
+              'pointer-events-none border-blue-500 group-focus:border-blue-500':
+                isActive
             }
           )}
         >
-          <div className="flex flex-col gap-1">
-            <span className="text-md">{note.title}</span>
+          <div className="flex flex-col">
+            <Typography
+              as="span"
+              size="lg"
+              weight="medium"
+              className="line-clamp-1"
+            >
+              {note.title}
+            </Typography>
             {note.content && (
-              <span className="text-sm text-gray-500">{note.content}</span>
+              <Typography as="p" size="sm" className="line-clamp-1 w-[90%]">
+                {note.content}
+              </Typography>
             )}
           </div>
           <div className="flex flex-col gap-2 text-xs text-gray-500">
-            <span>{createdAt}</span>
-            {isUpdated && <span>Последнее изменение: {updatedAt}</span>}
+            <Typography as="span" size="xs" weight="normal">
+              {createdAt}
+            </Typography>
+            {isUpdated && (
+              <Typography as="span" size="xs" weight="normal">
+                Последнее изменение: {updatedAt}
+              </Typography>
+            )}
           </div>
         </div>
       </button>

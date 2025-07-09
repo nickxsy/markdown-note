@@ -15,6 +15,8 @@ export function NotePage() {
     noteStore.selectors.selectNoteById(state, id)
   );
 
+  console.log(note);
+
   return (
     <NoteLayout
       editor={<MarkdownEditor note={note?.content || ''} />}

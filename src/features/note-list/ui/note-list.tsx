@@ -2,6 +2,7 @@ import { cn } from '@/shared/lib/css';
 import { dateFormatter } from '@/shared/lib/date-formatter';
 import { ScrollArea } from '@/shared/ui/scroll-area';
 import { Spinner } from '@/shared/ui/spinner';
+import { Typography } from '@/shared/ui/typography';
 
 import { useNoteList } from '../model/use-note-list';
 
@@ -25,9 +26,14 @@ export function NoteList() {
           {Object.entries(groupedNotes).map(([date, notes]) => (
             <li key={date} className="flex flex-col gap-1 py-2">
               <div className="px-4">
-                <h2 className="text-xs font-bold text-gray-500">
+                <Typography
+                  as="h2"
+                  size="xs"
+                  weight="bold"
+                  className="text-gray-500"
+                >
                   {dateFormatter(date)}
-                </h2>
+                </Typography>
               </div>
               <ul>
                 {notes.map(note => (

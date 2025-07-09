@@ -25,11 +25,7 @@ export function NoteLayout({
 
   return (
     <div className="flex h-screen">
-      <ResizablePanelGroup
-        autoSaveId="persistence"
-        direction="horizontal"
-        ref={ref}
-      >
+      <ResizablePanelGroup direction="horizontal" ref={ref}>
         <ResizablePanel defaultSize={20} minSize={20}>
           <div className="h-full w-full px-1 py-2">{editor}</div>
         </ResizablePanel>

@@ -11,8 +11,13 @@ import { NoteList } from '@/features/note-list';
 export function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-screen bg-gray-100">
-      <ResizablePanelGroup autoSaveId="persistence" direction="horizontal">
-        <ResizablePanel defaultSize={20} minSize={14} maxSize={32}>
+      <ResizablePanelGroup direction="horizontal">
+        <ResizablePanel
+          className="min-w-[260px]"
+          defaultSize={20}
+          minSize={14}
+          maxSize={32}
+        >
           <NoteSidebar notes={<NoteList />} />
         </ResizablePanel>
         <ResizableHandleCustom />
