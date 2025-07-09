@@ -1,7 +1,7 @@
 import { TrashIcon } from 'lucide-react';
 import type { ComponentProps } from 'react';
 
-import { Button } from '@/shared/ui/button';
+import { Button } from '@/shared/ui/button/button';
 
 import { useRemoveNote } from '../model/use-remove-note';
 

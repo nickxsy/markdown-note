@@ -17,7 +17,7 @@ export function NoteItem({ note }: { note: Note }) {
   const isUpdated = createdAt !== updatedAt;
 
   return (
-    <li className="relative">
+    <div className="relative">
       <button
         onClick={() => {
           navigate(`/note/${note.id}`);
@@ -72,6 +72,6 @@ export function NoteItem({ note }: { note: Note }) {
         size="icon"
         className="absolute top-2 right-6 rounded-full"
       />
-    </li>
+    </div>
   );
 }

@@ -4,13 +4,17 @@ import { ScrollArea } from '@/shared/ui/scroll-area';
 import { Spinner } from '@/shared/ui/spinner';
 import { Typography } from '@/shared/ui/typography';
 
-import { useNoteList } from '../model/use-note-list';
+import type { Note } from '@/entities/note';
 
-import { NoteItem } from './note-item';
+import { NoteItem } from '../note-item/note-item';
 
-export function NoteList() {
-  const { groupedNotes, isDelayedShow } = useNoteList();
-
+export function UiNoteList({
+  isDelayedShow,
+  groupedNotes
+}: {
+  isDelayedShow: boolean;
+  groupedNotes: Record<string, Note[]>;
+}) {
   return (
     <div className="relative flex h-full items-center justify-center">
       {isDelayedShow && (

@@ -1,7 +1,7 @@
 import { PlusIcon } from 'lucide-react';
 
 import { useAppearanceDelay } from '@/shared/lib/react';
-import { Button } from '@/shared/ui/button';
+import { Button } from '@/shared/ui/button/button';
 
 import { useCreateNote } from '../model/use-create-note';
 
