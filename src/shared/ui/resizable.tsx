@@ -53,4 +53,29 @@ function ResizableHandle({
   );
 }
 
-export { ResizablePanelGroup, ResizablePanel, ResizableHandle };
+function ResizableHandleCustom({
+  className,
+  ...props
+}: React.ComponentProps<typeof ResizablePrimitive.PanelResizeHandle>) {
+  return (
+    <div className="flex h-full items-center justify-center">
+      <ResizableHandle
+        className={cn(
+          'h-[100px] w-[4px] rounded-full bg-gray-200 transition',
+          'data-[resize-handle-state=hover]:bg-blue-300',
+          'data-[resize-handle-state=drag]:bg-blue-500',
+          'data-[resize-handle-state=drag]:scale-110',
+          className
+        )}
+        {...props}
+      />
+    </div>
+  );
+}
+
+export {
+  ResizablePanelGroup,
+  ResizableHandleCustom,
+  ResizablePanel,
+  ResizableHandle
+};

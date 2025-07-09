@@ -1,34 +1,43 @@
+import { useRef } from 'react';
+import type { ImperativePanelGroupHandle } from 'react-resizable-panels';
+
 import {
-  ResizableHandle,
+  ResizableHandleCustom,
   ResizablePanel,
   ResizablePanelGroup
 } from '@/shared/ui/resizable';
 
 export function NoteLayout({
-  header,
   editor,
   preview
 }: {
-  header: React.ReactNode;
   editor: React.ReactNode;
   preview: React.ReactNode;
 }) {
+  const ref = useRef<ImperativePanelGroupHandle>(null);
+
+  const resetLayout = () => {
+    const panelGroup = ref.current;
+    if (panelGroup) {
+      panelGroup.setLayout([20, 20]);
+    }
+  };
+
   return (
     <div className="flex h-screen">
-      <div className="flex flex-1 flex-col">
-        {header}
-        <div className="flex flex-1">
-          <ResizablePanelGroup direction="horizontal">
-            <ResizablePanel>
-              <div className="h-full w-full p-2">{editor}</div>
-            </ResizablePanel>
-            <ResizableHandle />
-            <ResizablePanel>
-              <div className="h-full w-full p-2">{preview}</div>
-            </ResizablePanel>
-          </ResizablePanelGroup>
-        </div>
-      </div>
+      <ResizablePanelGroup
+        autoSaveId="persistence"
+        direction="horizontal"
+        ref={ref}
+      >
+        <ResizablePanel defaultSize={20} minSize={20}>
+          <div className="h-full w-full px-1 py-2">{editor}</div>
+        </ResizablePanel>
+        <ResizableHandleCustom onDoubleClick={resetLayout} />
+        <ResizablePanel defaultSize={20} minSize={20}>
+          <div className="h-full w-full py-2 pr-2 pl-1">{preview}</div>
+        </ResizablePanel>
+      </ResizablePanelGroup>
     </div>
   );
 }

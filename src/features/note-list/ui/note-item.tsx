@@ -1,4 +1,5 @@
-import { Link, useRoute } from 'wouter';
+import { useRoute } from 'wouter';
+import { navigate } from 'wouter/use-browser-location';
 
 import { cn } from '@/shared/lib/css';
 
@@ -16,11 +17,16 @@ export function NoteItem({ note }: { note: Note }) {
 
   return (
     <li className="relative">
-      <Link
-        to={`/note/${note.id}`}
-        className={cn('group flex flex-col px-4 py-[2px]', {
-          'pointer-events-none': isActive
-        })}
+      <button
+        onClick={() => {
+          navigate(`/note/${note.id}`);
+        }}
+        className={cn(
+          'group flex w-full cursor-pointer flex-col px-4 py-[2px] text-left',
+          {
+            'pointer-events-none': isActive
+          }
+        )}
       >
         <div
           className={cn(
@@ -41,7 +47,8 @@ export function NoteItem({ note }: { note: Note }) {
             {isUpdated && <span>Последнее изменение: {updatedAt}</span>}
           </div>
         </div>
-      </Link>
+      </button>
+
       <RemoveNoteButton
         id={note.id}
         variant="outline"

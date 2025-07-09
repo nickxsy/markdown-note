@@ -4,11 +4,9 @@ import { useAppSelector } from '@/shared/lib/redux';
 
 import { noteStore } from '@/entities/note';
 
-import { NoteLayout } from '../compose/note-layout';
+import { MarkdownEditor, MarkdownPreview } from '@/features/markdown';
 
-import { MarkdownEditor } from './markdown-editor';
-import { MarkdownPreview } from './markdown-preview';
-import { NoteHeader } from './note-header';
+import { NoteLayout } from '../compose/note-layout';
 
 export function NotePage() {
   const { id } = useParams();
@@ -19,7 +17,6 @@ export function NotePage() {
 
   return (
     <NoteLayout
-      header={<NoteHeader />}
       editor={<MarkdownEditor note={note?.content || ''} />}
       preview={<MarkdownPreview />}
     />
