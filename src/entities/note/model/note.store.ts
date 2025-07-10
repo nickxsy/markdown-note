@@ -3,6 +3,7 @@ import { createSelector, createSlice } from '@reduxjs/toolkit';
 
 import { createBaseSelector, registerSlice } from '@/shared/lib/redux';
 
+import { groupNotesByDate } from './lib/group-notes-by-data';
 import { createNote } from './services/create-note';
 import { getNoteById } from './services/get-note-by-id';
 import { loadNotes } from './services/get-notes';
@@ -17,17 +18,6 @@ const initialState: NoteSchema = {
   isError: false,
   error: undefined
 };
-
-function groupNotesByDate(notes: Note[]) {
-  return notes.reduce((acc: Record<string, Note[]>, note) => {
-    const date = note.updatedAt.split('T')[0];
-
-    acc[date] = acc[date] || [];
-    acc[date].push(note);
-
-    return acc;
-  }, {});
-}
 
 export const noteSlice = createSlice({
   name: 'note',

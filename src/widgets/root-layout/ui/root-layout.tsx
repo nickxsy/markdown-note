@@ -1,4 +1,4 @@
-import { NoteSidebar } from '@/pages/note';
+import type { ReactNode } from 'react';
 
 import {
   ResizableHandleCustom,
@@ -6,9 +6,13 @@ import {
   ResizablePanelGroup
 } from '@/shared/ui/resizable';
 
-import { NoteList } from '@/features/note-list';
-
-export function RootLayout({ children }: { children: React.ReactNode }) {
+export function RootLayout({
+  sidebar,
+  children
+}: {
+  sidebar: ReactNode;
+  children: ReactNode;
+}) {
   return (
     <div className="flex h-screen bg-gray-100">
       <ResizablePanelGroup direction="horizontal">
@@ -18,7 +22,7 @@ export function RootLayout({ children }: { children: React.ReactNode }) {
           minSize={14}
           maxSize={32}
         >
-          <NoteSidebar notes={<NoteList />} />
+          {sidebar}
         </ResizablePanel>
         <ResizableHandleCustom />
         <ResizablePanel>

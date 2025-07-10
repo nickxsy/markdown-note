@@ -16,7 +16,9 @@ export const createNote = createAsyncThunk('notes/createNote', async () => {
 
   const response = await noteRepository.createNote(newNote);
 
-  navigate(`/note/${response.id}`);
+  if (response) {
+    navigate(`/note/${response.id}`);
+  }
 
   return response;
 });

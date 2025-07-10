@@ -7,15 +7,12 @@ import type { DeleteNoteData } from '../types';
 export const removeNote = createAsyncThunk(
   'notes/removeNote',
   async (note: DeleteNoteData) => {
-    try {
-      const response = await noteRepository.removeNote(note);
+    const response = await noteRepository.removeNote(note);
 
+    if (response) {
       navigate('/');
-
-      return response;
-    } catch (error) {
-      console.error('Error deleting note:', error);
-      throw error;
     }
+
+    return response;
   }
 );

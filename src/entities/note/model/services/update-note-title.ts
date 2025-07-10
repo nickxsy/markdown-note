@@ -6,13 +6,6 @@ import type { UpdateNoteData } from '../types';
 export const updateNoteTitle = createAsyncThunk(
   'notes/updateNoteTitle',
   async (data: UpdateNoteData) => {
-    try {
-      const response = await noteRepository.updateNoteTitle(data);
-
-      return response;
-    } catch (error) {
-      console.error('Error updating note title:', error);
-      throw error;
-    }
+    return await noteRepository.updateNoteTitle(data);
   }
 );

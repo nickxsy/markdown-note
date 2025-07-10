@@ -12,10 +12,8 @@ export function HomeLayout({ empty }: { empty: ReactNode }) {
 
 export function HomeLayoutEmpty() {
   return (
-    <div>
-      <Typography as="p" size="lg">
-        Выберите заметку или создайте новую
-      </Typography>
-    </div>
+    <Typography as="p" size="lg">
+      Выберите заметку или создайте новую
+    </Typography>
   );
 }
