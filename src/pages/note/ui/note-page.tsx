@@ -6,7 +6,7 @@ import { noteStore } from '@/entities/note';
 
 import { MarkdownEditor, MarkdownPreview } from '@/features/markdown';
 
-import { NoteLayout } from '../compose/note-layout';
+import { NoteLayout } from './note-layout';
 
 export function NotePage() {
   const { id } = useParams();

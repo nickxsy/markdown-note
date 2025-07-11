@@ -6,7 +6,7 @@ import { NotePage } from '@/pages/note';
 import { RootLayout } from '@/widgets/root-layout';
 import { Sidebar } from '@/widgets/sidebar';
 
-import { ROUTES } from '@/shared/const/routes';
+import { ROUTES } from '@/shared/model/routes';
 
 import { NoteList } from '@/features/note-list';
 

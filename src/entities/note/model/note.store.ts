@@ -77,7 +77,7 @@ export const noteSlice = createSlice({
       })
 
       .addCase(removeNote.fulfilled, (state, action) => {
-        state.data = state.data.filter(note => note.id !== action.payload.id);
+        state.data = state.data.filter(note => note.id !== action.payload?.id);
         state.groupedData = groupNotesByDate(state.data);
         state.isLoading = false;
       })

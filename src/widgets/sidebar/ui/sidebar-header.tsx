@@ -1,6 +1,6 @@
 import { navigate } from 'wouter/use-browser-location';
 
-import { ROUTES } from '@/shared/const/routes';
+import { ROUTES } from '@/shared/model/routes';
 import { Typography } from '@/shared/ui/typography';
 
 import { CreateNoteButton } from '@/features/note';

@@ -7,6 +7,8 @@ export function useNoteList() {
   const notes = useAppSelector(noteStore.selectors.selectNotes);
   const groupedNotes = useAppSelector(noteStore.selectors.selectGroupedNotes);
   const isLoading = useAppSelector(noteStore.selectors.selectIsLoading);
+  const isError = useAppSelector(noteStore.selectors.selectIsError);
+  const error = useAppSelector(noteStore.selectors.selectError);
 
   const isDelayedShow = useAppearanceDelay(isLoading);
 
@@ -14,6 +16,8 @@ export function useNoteList() {
     notes,
     groupedNotes,
     isLoading,
-    isDelayedShow
+    isDelayedShow,
+    isError,
+    error
   };
 }

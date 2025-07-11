@@ -1,5 +1,6 @@
-import { CONIFG } from '@/shared/const/config';
+import { clientApi } from '@/shared/api/instance';
 
+import { handleRepositoryError } from './lib/handle-repository-error';
 import type {
   CreateNoteData,
   DeleteNoteData,
@@ -10,111 +11,58 @@ import type {
 export const noteRepository = {
   getNotes: async () => {
     try {
-      const response = await fetch(
-        `${CONIFG.API_URL}/notes?_sort=createdAt&_order=desc`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          }
+      const response = await clientApi.get('/notes', {
+        params: {
+          _sort: 'createdAt',
+          _order: 'desc'
         }
-      );
+      });
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch notes');
-      }
-
-      const data = await response.json();
-
-      return data;
+      return response.data;
     } catch (error) {
-      console.error('Error fetching notes:', error);
-      return [];
+      handleRepositoryError(error, 'Ошибка при запросе заметок');
     }
   },
 
   getNoteById: async (note: NotePartial) => {
     try {
-      const response = await fetch(`${CONIFG.API_URL}/notes/${note.id}`);
+      const response = await clientApi.get(`/notes/${note.id}`);
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch note');
-      }
-
-      const data = await response.json();
-      return data;
+      return response.data;
     } catch (error) {
-      console.error('Error fetching note:', error);
-      return null;
+      handleRepositoryError(error, 'Ошибка при запросе заметки');
     }
   },
 
   createNote: async (note: CreateNoteData) => {
     try {
-      const response = await fetch(`${CONIFG.API_URL}/notes`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json'
-        },
-        body: JSON.stringify({
-          ...note
-        })
-      });
+      const response = await clientApi.post('/notes', note);
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Server error response:', errorText);
-        throw new Error(
-          `Failed to create note: ${response.status} ${errorText}`
-        );
-      }
-
-      // Возвращаем созданную заметку, даже если сервер не вернул данные
-      return note;
+      return response.data;
     } catch (error) {
-      console.error('Error creating note:', error);
-      throw error;
+      handleRepositoryError(error, 'Ошибка при создании заметки');
     }
   },
 
   updateNoteTitle: async (note: UpdateNoteData) => {
     try {
-      const response = await fetch(`${CONIFG.API_URL}/notes/${note.id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          title: note.title
-        })
+      const response = await clientApi.patch(`/notes/${note.id}`, {
+        title: note.title
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to update note');
-      }
-
-      return note;
+      return response.data;
     } catch (error) {
-      console.error('Error updating note:', error);
-      throw error;
+      handleRepositoryError(error, 'Ошибка при обновлении заметки');
     }
   },
 
   removeNote: async (note: DeleteNoteData) => {
     try {
-      const response = await fetch(`${CONIFG.API_URL}/notes/${note.id}`, {
-        method: 'DELETE'
-      });
+      await clientApi.delete(`/notes/${note.id}`);
 
-      if (!response.ok) {
-        throw new Error('Failed to delete note');
-      }
-
-      return note;
+      return { id: note.id };
     } catch (error) {
-      console.error('Error deleting note:', error);
-      throw error;
+      handleRepositoryError(error, 'Ошибка при удалении заметки');
     }
   }
 };
