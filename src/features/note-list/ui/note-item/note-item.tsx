@@ -31,7 +31,7 @@ export function NoteItem({ note }: { note: Note }) {
       >
         <div
           className={cn(
-            'flex flex-col gap-[6px] rounded-2xl border-2 border-transparent bg-gray-100 p-[14px] transition-colors group-hover:bg-gray-200 group-focus:border-blue-300',
+            'bg-card group-hover:bg-card-hover flex flex-col gap-[6px] rounded-2xl border-2 border-transparent p-[14px] transition-colors group-focus:border-blue-300',
             {
               'pointer-events-none border-blue-500 group-focus:border-blue-500':
                 isActive
@@ -66,12 +66,7 @@ export function NoteItem({ note }: { note: Note }) {
         </div>
       </button>
 
-      <RemoveNoteButton
-        id={note.id}
-        variant="outline"
-        size="icon"
-        className="absolute top-2 right-6 rounded-full"
-      />
+      <RemoveNoteButton id={note.id} className="absolute top-2 right-6" />
     </div>
   );
 }

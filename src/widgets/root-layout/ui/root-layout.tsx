@@ -14,7 +14,7 @@ export function RootLayout({
   children: ReactNode;
 }) {
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="bg-background flex h-screen">
       <ResizablePanelGroup direction="horizontal">
         <ResizablePanel
           className="min-w-[260px]"

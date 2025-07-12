@@ -7,6 +7,7 @@ import { UiNoteList } from './ui-note-list';
 const meta = {
   title: 'Features/NoteList/NoteList',
   component: UiNoteList,
+
   parameters: {
     layout: 'centered'
   },

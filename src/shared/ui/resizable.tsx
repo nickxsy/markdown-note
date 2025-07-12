@@ -61,9 +61,9 @@ function ResizableHandleCustom({
     <div className="flex h-full items-center justify-center">
       <ResizableHandle
         className={cn(
-          'h-[100px] w-[4px] rounded-full bg-gray-200 transition',
-          'data-[resize-handle-state=hover]:bg-blue-300',
-          'data-[resize-handle-state=drag]:bg-blue-500',
+          'dark:bg-sidebar-accent h-[100px] w-[4px] rounded-full bg-gray-200 transition',
+          'data-[resize-handle-state=hover]:bg-blue-300 dark:data-[resize-handle-state=hover]:bg-blue-950',
+          'data-[resize-handle-state=drag]:bg-blue-500 dark:data-[resize-handle-state=drag]:bg-blue-500',
           'data-[resize-handle-state=drag]:scale-110',
           className
         )}

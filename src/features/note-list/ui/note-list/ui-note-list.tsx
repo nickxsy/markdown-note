@@ -21,7 +21,7 @@ export function UiNoteList({
         <Spinner className="absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2" />
       )}
 
-      <ScrollArea className="h-full w-full rounded-2xl bg-white">
+      <ScrollArea className="bg-sidebar h-full w-full rounded-2xl">
         <ul
           className={cn('flex h-full w-full flex-col py-3', {
             'pointer-events-none opacity-20': isDelayedShow

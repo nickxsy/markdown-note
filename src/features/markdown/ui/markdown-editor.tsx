@@ -12,7 +12,7 @@ export function MarkdownEditor({ note }: { note: string }) {
   return (
     <Textarea
       name="markdown-editor"
-      className="h-full w-full resize-none rounded-2xl border-none bg-white p-4 font-mono focus:ring-0 focus:outline-none focus-visible:ring-0"
+      className="bg-sidebar h-full w-full resize-none rounded-2xl border-none p-4 font-mono focus:ring-0 focus:outline-none focus-visible:ring-0"
       placeholder="Начните писать..."
       value={value}
       onChange={e => setValue(e.target.value)}

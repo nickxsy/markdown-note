@@ -1,12 +1,14 @@
 import { TrashIcon } from 'lucide-react';
 import type { ComponentProps } from 'react';
 
+import { cn } from '@/shared/lib/css';
 import { Button } from '@/shared/ui/button/button';
 
 import { useRemoveNote } from '../model/use-remove-note';
 
 export function RemoveNoteButton({
   id,
+  className,
   ...props
 }: {
   id: string;
@@ -15,9 +17,10 @@ export function RemoveNoteButton({
 
   return (
     <Button
-      variant="ghost"
+      variant="secondary"
       size="icon"
       onClick={() => removeNote(id)}
+      className={cn('rounded-full', className)}
       {...props}
     >
       <TrashIcon />

@@ -1,4 +1,5 @@
 export const ROUTES = {
   HOME: '/',
-  NOTE: '/note/:id'
+  NOTE: '/note/:id',
+  AUTH: '/auth'
 };
