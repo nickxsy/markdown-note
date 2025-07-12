@@ -5,7 +5,7 @@ const server = jsonServer.create();
 const router = jsonServer.router(path.resolve(__dirname, 'db.json'));
 const middlewares = jsonServer.defaults();
 
-const timeout = 0;
+const timeout = 1000;
 
 // Добавляем CORS middleware
 server.use((req, res, next) => {

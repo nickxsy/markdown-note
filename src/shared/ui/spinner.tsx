@@ -6,7 +6,7 @@ export function Spinner({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
       className={cn(
-        'size-6 animate-spin rounded-full border-2 border-black border-t-transparent',
+        'size-6 animate-spin rounded-full border-2 border-black border-t-transparent dark:border-white dark:border-t-transparent',
         className
       )}
       {...props}

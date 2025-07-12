@@ -2,21 +2,23 @@ import { MoonIcon, SunIcon } from 'lucide-react';
 import type { ComponentProps } from 'react';
 
 import { cn } from '@/shared/lib/css';
+import { useAppDispatch, useAppSelector } from '@/shared/lib/redux';
 import { Button } from '@/shared/ui/button/button';
 
-import { useTheme } from '../theme-provider';
+import { themeStore } from '../model/theme.store';
 
 export function ThemeSwitcher({
   className,
   ...props
 }: ComponentProps<typeof Button>) {
-  const { theme, setTheme } = useTheme();
+  const dispatch = useAppDispatch();
+  const theme = useAppSelector(themeStore.selectors.selectTheme);
 
   return (
     <Button
       variant="secondary"
       size="icon"
-      onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+      onClick={() => dispatch(themeStore.actions.toggleTheme())}
       className={cn('rounded-full', className)}
       {...props}
     >
