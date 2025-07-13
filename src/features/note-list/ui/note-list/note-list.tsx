@@ -3,13 +3,16 @@ import { useNoteList } from '../../model/use-note-list';
 import { UiNoteList } from './ui-note-list';
 
 export function NoteList() {
-  const { groupedNotes, isDelayedShow, error } = useNoteList();
+  const noteList = useNoteList();
 
-  if (error) {
-    return <div className="text-red-500">{error}</div>;
+  if (noteList.error) {
+    return <div className="text-red-500">{noteList.error}</div>;
   }
 
   return (
-    <UiNoteList isDelayedShow={isDelayedShow} groupedNotes={groupedNotes} />
+    <UiNoteList
+      isDelayedShow={noteList.isDelayedShow}
+      groupedNotes={noteList.groupedNotes}
+    />
   );
 }

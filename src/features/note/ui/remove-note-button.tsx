@@ -13,13 +13,13 @@ export function RemoveNoteButton({
 }: {
   id: string;
 } & ComponentProps<typeof Button>) {
-  const { removeNote } = useRemoveNote();
+  const remove = useRemoveNote();
 
   return (
     <Button
       variant="secondary"
       size="icon"
-      onClick={() => removeNote(id)}
+      onClick={remove.removeNote(id)}
       className={cn('rounded-full', className)}
       {...props}
     >

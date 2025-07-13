@@ -8,6 +8,8 @@ import type { Note } from '@/entities/note';
 
 import { RemoveNoteButton } from '@/features/note';
 
+import { NoteItemTitleInput } from './note-item-title-input';
+
 export function NoteItem({ note }: { note: Note }) {
   const [isActive] = useRoute(`/note/${note.id}`);
 
@@ -39,14 +41,8 @@ export function NoteItem({ note }: { note: Note }) {
           )}
         >
           <div className="flex flex-col">
-            <Typography
-              as="span"
-              size="lg"
-              weight="medium"
-              className="line-clamp-1"
-            >
-              {note.title}
-            </Typography>
+            <NoteItemTitleInput title={note.title} />
+
             {note.content && (
               <Typography as="p" size="sm" className="line-clamp-1 w-[90%]">
                 {note.content}

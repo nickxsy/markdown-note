@@ -6,6 +6,8 @@ import {
   ResizablePanelGroup
 } from '@/shared/ui/resizable';
 
+import { CurrentThemeValue } from '@/entities/theme';
+
 export function RootLayout({
   sidebar,
   children
@@ -15,6 +17,7 @@ export function RootLayout({
 }) {
   return (
     <div className="bg-background flex h-screen">
+      <CurrentThemeValue />
       <ResizablePanelGroup direction="horizontal">
         <ResizablePanel
           className="min-w-[260px]"

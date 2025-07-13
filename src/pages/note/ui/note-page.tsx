@@ -9,10 +9,10 @@ import { MarkdownEditor, MarkdownPreview } from '@/features/markdown';
 import { NoteLayout } from './note-layout';
 
 export function NotePage() {
-  const { id } = useParams();
+  const params = useParams();
 
   const note = useAppSelector(state =>
-    noteStore.selectors.selectNoteById(state, id)
+    noteStore.selectors.selectNoteById(state, params.id)
   );
 
   return (

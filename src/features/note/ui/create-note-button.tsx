@@ -11,12 +11,12 @@ export function CreateNoteButton({
   className,
   ...props
 }: ComponentProps<typeof Button>) {
-  const { createNote, isLoading } = useCreateNote();
-  const isDelayedShow = useAppearanceDelay(isLoading);
+  const note = useCreateNote();
+  const isDelayedShow = useAppearanceDelay(note.isLoading);
 
   return (
     <Button
-      onClick={createNote}
+      onClick={note.createNote}
       disabled={isDelayedShow}
       variant="secondary"
       size="icon"
