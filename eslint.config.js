@@ -13,20 +13,36 @@ export default tseslint.config(
     {
       files: ['**/*.{ts,tsx}'],
       rules: {
-        'react-refresh/only-export-components': 'off'
+        'react-refresh/only-export-components': 'off',
+        'no-restricted-syntax': [
+          'error',
+          {
+            selector: 'VariableDeclarator > ObjectPattern',
+            message: 'Деструктуризация объектов запрещена'
+          }
+        ]
       },
+
       extends: [
         js.configs.recommended,
         tseslint.configs.recommended,
         reactHooks.configs['recommended-latest'],
         reactRefresh.configs.vite
       ],
+
       languageOptions: {
         ecmaVersion: 2020,
         globals: globals.browser
       }
+    },
+    {
+      files: ['src/shared/**'],
+      rules: {
+        'no-restricted-syntax': 'off'
+      }
     }
   ],
+
   storybook.configs['flat/recommended'],
   storybook.configs['flat/recommended']
 );
