@@ -14,6 +14,8 @@ export default tseslint.config(
       files: ['**/*.{ts,tsx}'],
       rules: {
         'react-refresh/only-export-components': 'off',
+        'react-hooks/rules-of-hooks': 'error',
+        'react-hooks/exhaustive-deps': 'warn',
         'no-restricted-syntax': [
           'error',
           {
