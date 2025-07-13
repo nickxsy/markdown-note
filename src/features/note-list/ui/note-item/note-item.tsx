@@ -1,6 +1,7 @@
 import { useRoute } from 'wouter';
 import { navigate } from 'wouter/use-browser-location';
 
+import { useFeatureFlag } from '@/shared/feature-flags';
 import { cn } from '@/shared/lib/css';
 import { Typography } from '@/shared/ui/typography';
 
@@ -12,6 +13,8 @@ import { NoteItemTitleInput } from './note-item-title-input';
 
 export function NoteItem({ note }: { note: Note }) {
   const [isActive] = useRoute(`/note/${note.id}`);
+  const deleteNoteIsEnabled = useFeatureFlag('deleteNote');
+  const editNoteIsEnabled = useFeatureFlag('editNote');
 
   const createdAt = new Date(note.createdAt).toLocaleString();
   const updatedAt = new Date(note.updatedAt).toLocaleString();
@@ -41,7 +44,17 @@ export function NoteItem({ note }: { note: Note }) {
           )}
         >
           <div className="flex flex-col">
-            <NoteItemTitleInput title={note.title} />
+            {editNoteIsEnabled && <NoteItemTitleInput title={note.title} />}
+            {!editNoteIsEnabled && (
+              <Typography
+                as="span"
+                size="lg"
+                weight="medium"
+                className="line-clamp-1"
+              >
+                {note.title}
+              </Typography>
+            )}
 
             {note.content && (
               <Typography as="p" size="sm" className="line-clamp-1 w-[90%]">
@@ -62,7 +75,9 @@ export function NoteItem({ note }: { note: Note }) {
         </div>
       </button>
 
-      <RemoveNoteButton id={note.id} className="absolute top-2 right-6" />
+      {deleteNoteIsEnabled && (
+        <RemoveNoteButton id={note.id} className="absolute top-2 right-6" />
+      )}
     </div>
   );
 }

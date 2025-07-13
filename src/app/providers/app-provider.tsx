@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
 
 import { ComposeChildren } from '@/shared/lib/react';
@@ -10,7 +10,7 @@ export function AppProvider({ children }: PropsWithChildren) {
   return (
     <ComposeChildren>
       <Provider store={store} children={null} />
-      <ThemeProvider children={null} />
+      <ThemeProvider />
       {children}
     </ComposeChildren>
   );

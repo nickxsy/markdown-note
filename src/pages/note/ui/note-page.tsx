@@ -1,5 +1,6 @@
 import { useParams } from 'wouter';
 
+import { FeatureToggler } from '@/shared/feature-flags';
 import { useAppSelector } from '@/shared/lib/redux';
 
 import { noteStore } from '@/entities/note';
@@ -16,9 +17,12 @@ export function NotePage() {
   );
 
   return (
-    <NoteLayout
-      editor={<MarkdownEditor note={note?.content || ''} />}
-      preview={<MarkdownPreview />}
-    />
+    <>
+      <FeatureToggler />
+      <NoteLayout
+        editor={<MarkdownEditor note={note?.content || ''} />}
+        preview={<MarkdownPreview />}
+      />
+    </>
   );
 }

@@ -4,6 +4,7 @@ import { themeStore } from './theme.store';
 
 export function useTheme() {
   const theme = useAppSelector(themeStore.selectors.selectTheme);
+
   const dispatch = useAppDispatch();
 
   const changeTheme = () => {

@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 
+import { useFeatureFlag } from '@/shared/feature-flags';
 import {
   ResizableHandleCustom,
   ResizablePanel,
@@ -15,9 +16,11 @@ export function RootLayout({
   sidebar: ReactNode;
   children: ReactNode;
 }) {
+  const darkThemeIsEnabled = useFeatureFlag('darkTheme');
+
   return (
     <div className="bg-background flex h-screen">
-      <CurrentThemeValue />
+      {darkThemeIsEnabled && <CurrentThemeValue />}
       <ResizablePanelGroup direction="horizontal">
         <ResizablePanel
           className="min-w-[260px]"
