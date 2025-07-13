@@ -1,5 +1,7 @@
+export type NoteId = Brand<string, 'NoteId'>;
+
 export type Note = {
-  id: string;
+  id: NoteId;
   title: string;
   content?: string;
   updatedAt: string;
@@ -7,7 +9,7 @@ export type Note = {
 };
 
 export type NotePartial = {
-  id?: string;
+  id?: NoteId;
   title?: string;
   content?: string;
   updatedAt?: string;
@@ -15,7 +17,7 @@ export type NotePartial = {
 };
 
 export type CreateNoteData = {
-  id: string;
+  id: NoteId;
   title: string;
   content: string;
   updatedAt: string;
@@ -23,13 +25,13 @@ export type CreateNoteData = {
 };
 
 export type UpdateNoteData = {
-  id: string;
+  id: NoteId;
   title: string;
   content?: string;
 };
 
 export type DeleteNoteData = {
-  id: string;
+  id: NoteId;
 };
 
 export type NoteSchema = {

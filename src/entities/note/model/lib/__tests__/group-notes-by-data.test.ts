@@ -1,27 +1,27 @@
 import { describe, expect, it } from 'vitest';
 
-import type { Note } from '../../types';
+import type { Note, NoteId } from '../../types';
 import { groupNotesByDate } from '../group-notes-by-data';
 
 describe('groupNotesByDate', () => {
   it('должен группировать заметки по дате', () => {
     const notes: Note[] = [
       {
-        id: '1',
+        id: '1' as NoteId,
         title: 'Note 1',
         content: 'Content 1',
         createdAt: '2024-03-20T10:00:00.000Z',
         updatedAt: '2024-03-20T10:00:00.000Z'
       },
       {
-        id: '2',
+        id: '2' as NoteId,
         title: 'Note 2',
         content: 'Content 2',
         createdAt: '2024-03-20T11:00:00.000Z',
         updatedAt: '2024-03-20T11:00:00.000Z'
       },
       {
-        id: '3',
+        id: '3' as NoteId,
         title: 'Note 3',
         content: 'Content 3',
         createdAt: '2024-03-21T10:00:00.000Z',
@@ -34,14 +34,14 @@ describe('groupNotesByDate', () => {
     expect(result).toEqual({
       '2024-03-20': [
         {
-          id: '1',
+          id: '1' as NoteId,
           title: 'Note 1',
           content: 'Content 1',
           createdAt: '2024-03-20T10:00:00.000Z',
           updatedAt: '2024-03-20T10:00:00.000Z'
         },
         {
-          id: '2',
+          id: '2' as NoteId,
           title: 'Note 2',
           content: 'Content 2',
           createdAt: '2024-03-20T11:00:00.000Z',
@@ -50,7 +50,7 @@ describe('groupNotesByDate', () => {
       ],
       '2024-03-21': [
         {
-          id: '3',
+          id: '3' as NoteId,
           title: 'Note 3',
           content: 'Content 3',
           createdAt: '2024-03-21T10:00:00.000Z',

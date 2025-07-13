@@ -1,12 +1,12 @@
 import { useAppDispatch } from '@/shared/lib/redux';
 
-import { noteStore } from '@/entities/note';
+import { type DeleteNoteData, noteStore } from '@/entities/note';
 
 export function useRemoveNote() {
   const dispatch = useAppDispatch();
 
-  const removeNote = (id: string) => () => {
-    dispatch(noteStore.actions.removeNote({ id }));
+  const removeNote = (note: DeleteNoteData) => () => {
+    dispatch(noteStore.actions.removeNote(note));
   };
 
   return { removeNote };

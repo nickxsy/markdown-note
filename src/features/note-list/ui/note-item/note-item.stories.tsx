@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { StoreProvider } from '@/shared/provider/store-provider';
 
+import type { NoteId } from '@/entities/note';
+
 import { NoteItem } from './note-item';
 
 const meta = {
@@ -24,7 +26,7 @@ const meta = {
 } satisfies Meta<typeof NoteItem>;
 
 const note = {
-  id: '1',
+  id: '1' as NoteId,
   title: 'Новая заметка',
   content:
     'Сегодня был замечательный день! Я начал работу над новым проектом, который давно планировал. Встретился с командой, обсудили основные цели и задачи. Все прошло очень продуктивно.',

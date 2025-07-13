@@ -4,14 +4,16 @@ import type { ComponentProps } from 'react';
 import { cn } from '@/shared/lib/css';
 import { Button } from '@/shared/ui/button/button';
 
+import type { DeleteNoteData } from '@/entities/note';
+
 import { useRemoveNote } from '../model/use-remove-note';
 
 export function RemoveNoteButton({
-  id,
+  note,
   className,
   ...props
 }: {
-  id: string;
+  note: DeleteNoteData;
 } & ComponentProps<typeof Button>) {
   const remove = useRemoveNote();
 
@@ -19,7 +21,7 @@ export function RemoveNoteButton({
     <Button
       variant="secondary"
       size="icon"
-      onClick={remove.removeNote(id)}
+      onClick={remove.removeNote(note)}
       className={cn('rounded-full', className)}
       {...props}
     >

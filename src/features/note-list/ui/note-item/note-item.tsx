@@ -76,7 +76,7 @@ export function NoteItem({ note }: { note: Note }) {
       </button>
 
       {deleteNoteIsEnabled && (
-        <RemoveNoteButton id={note.id} className="absolute top-2 right-6" />
+        <RemoveNoteButton note={note} className="absolute top-2 right-6" />
       )}
     </div>
   );
