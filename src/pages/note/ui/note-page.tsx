@@ -1,9 +1,9 @@
 import { Head } from '@unhead/react';
 import { useParams } from 'wouter';
 
-import { FeatureToggler } from '@/shared/feature-flags';
 import { useAppSelector } from '@/shared/lib/redux';
 
+import { FeatureToggler } from '@/entities/feature-flags';
 import { noteStore } from '@/entities/note';
 
 import { MarkdownEditor, MarkdownPreview } from '@/features/markdown';

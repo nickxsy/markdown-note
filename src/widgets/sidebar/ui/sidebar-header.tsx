@@ -1,10 +1,10 @@
 import { navigate } from 'wouter/use-browser-location';
 
-import { useFeatureFlag } from '@/shared/feature-flags';
 import { ROUTES } from '@/shared/model/routes';
 import { Button } from '@/shared/ui/button/button';
 import { Typography } from '@/shared/ui/typography';
 
+import { useFeatureFlag } from '@/entities/feature-flags';
 import { ThemeSwitcher } from '@/entities/theme';
 
 import { CreateNoteButton } from '@/features/note';

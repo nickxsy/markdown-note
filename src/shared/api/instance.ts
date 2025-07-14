@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-import { CONIFG } from '@/shared/model/config';
+import { CONFIG } from '@/shared/model/config';
 
 export const clientApi = axios.create({
-  baseURL: CONIFG.API_URL
+  baseURL: CONFIG.API_URL
 });

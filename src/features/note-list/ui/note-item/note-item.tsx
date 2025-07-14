@@ -1,10 +1,10 @@
 import { useRoute } from 'wouter';
 import { navigate } from 'wouter/use-browser-location';
 
-import { useFeatureFlag } from '@/shared/feature-flags';
 import { cn } from '@/shared/lib/css';
 import { Typography } from '@/shared/ui/typography';
 
+import { useFeatureFlag } from '@/entities/feature-flags';
 import type { Note } from '@/entities/note';
 
 import { RemoveNoteButton } from '@/features/note';

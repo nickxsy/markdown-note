@@ -1,7 +1,8 @@
 import { type PropsWithChildren, useLayoutEffect, useRef } from 'react';
 
-import { useFeatureFlag } from '@/shared/feature-flags';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/redux';
+
+import { useFeatureFlag } from '@/entities/feature-flags';
 
 import { themeStore } from '../model/theme.store';
 

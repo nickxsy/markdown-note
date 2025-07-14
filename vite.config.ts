@@ -7,14 +7,24 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   plugins: [react(), tsconfigPaths(), tailwindcss()],
-  server: {
-    watch: {
-      ignored: ['**/public/**', '**/json-server/**']
-    }
-  },
+
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src')
     }
+  },
+
+  server: {
+    host: '0.0.0.0',
+    watch: {
+      ignored: ['**/public/**', '**/json-server/**']
+    }
+  },
+
+  // For docker preview
+
+  preview: {
+    host: '0.0.0.0',
+    port: 8000
   }
 });

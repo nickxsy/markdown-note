@@ -1,12 +1,12 @@
 import type { ReactNode } from 'react';
 
-import { useFeatureFlag } from '@/shared/feature-flags';
 import {
   ResizableHandleCustom,
   ResizablePanel,
   ResizablePanelGroup
 } from '@/shared/ui/resizable';
 
+import { useFeatureFlag } from '@/entities/feature-flags';
 import { CurrentThemeValue } from '@/entities/theme';
 
 export function RootLayout({
