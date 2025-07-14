@@ -2,18 +2,19 @@ import { SettingsIcon } from 'lucide-react';
 
 import { useAppDispatch, useAppSelector } from '@/shared/lib/redux';
 import { Button } from '@/shared/ui/button/button';
-import { Checkbox } from '@/shared/ui/checkbox';
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger
 } from '@/shared/ui/dialog';
-import { Label } from '@/shared/ui/label';
 
 import { featureStore } from '../model/feature-flags.store';
 import type { FeatureFlags } from '../model/types';
+
+import { FeatureTogglerCheckbox } from './feature-toggler-checkbox';
 
 const FEATURE_FLAGS: Array<keyof FeatureFlags> = [
   'darkTheme',
@@ -48,16 +49,20 @@ export function FeatureToggler() {
           size="icon"
           className="fixed right-4 bottom-4"
         >
-          <SettingsIcon className="h-4 w-4" />
+          <SettingsIcon />
         </Button>
       </DialogTrigger>
 
       <DialogContent className="flex flex-col gap-2">
         <DialogHeader>
           <DialogTitle>Feature Flags</DialogTitle>
+          <DialogDescription>
+            Включайте и отключайте дополнительные функции приложения
+          </DialogDescription>
         </DialogHeader>
+
         {FEATURE_FLAGS.map(flag => (
-          <FeatureToggleCheckbox
+          <FeatureTogglerCheckbox
             key={flag}
             featureFlag={flag}
             checked={featureFlags[flag]}
@@ -68,33 +73,5 @@ export function FeatureToggler() {
         ))}
       </DialogContent>
     </Dialog>
-  );
-}
-
-function FeatureToggleCheckbox({
-  featureFlag,
-  checked,
-  onChange
-}: {
-  featureFlag: keyof FeatureFlags;
-  checked: boolean;
-  onChange: () => void;
-}) {
-  return (
-    <>
-      <Label className="hover:bg-accent/50 flex items-start gap-3 rounded-lg border p-3 has-[[aria-checked=true]]:border-blue-600 has-[[aria-checked=true]]:bg-blue-50 dark:has-[[aria-checked=true]]:border-blue-900 dark:has-[[aria-checked=true]]:bg-blue-950">
-        <Checkbox
-          id={featureFlag}
-          defaultChecked={checked}
-          onCheckedChange={onChange}
-        />
-        <div className="grid gap-1.5 font-normal">
-          <p className="text-sm leading-none font-medium">{featureFlag}</p>
-          <p className="text-muted-foreground text-sm">
-            You can enable or disable {featureFlag} at any time.
-          </p>
-        </div>
-      </Label>
-    </>
   );
 }
