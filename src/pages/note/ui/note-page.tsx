@@ -1,3 +1,4 @@
+import { Head } from '@unhead/react';
 import { useParams } from 'wouter';
 
 import { FeatureToggler } from '@/shared/feature-flags';
@@ -18,6 +19,12 @@ export function NotePage() {
 
   return (
     <>
+      <Head>
+        <title>{note?.title || 'Заметка'}</title>
+        {note?.content && (
+          <meta name="description" content={note?.content.slice(0, 100)} />
+        )}
+      </Head>
       <FeatureToggler />
       <NoteLayout
         editor={<MarkdownEditor note={note?.content || ''} />}
