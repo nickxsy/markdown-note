@@ -9,12 +9,13 @@ import { getNoteById } from './services/get-note-by-id';
 import { loadNotes } from './services/get-notes';
 import { removeNote } from './services/remove-note';
 import { updateNoteTitle } from './services/update-note-title';
-import type { Note, NoteSchema } from './types';
+import type { Note, NoteId, NoteSchema } from './types';
 
 const initialState: NoteSchema = {
   data: [],
   groupedData: {},
   isLoading: false,
+
   isError: false,
   error: undefined
 };
@@ -135,7 +136,7 @@ const selectError = createSelector(noteBaseSelector, s => s.error);
 const selectNoteById = createSelector(
   selectNotes,
   (_, id) => id,
-  (notes: Note[], id: string) => {
+  (notes: Note[], id: NoteId) => {
     return notes.find(note => note.id === id);
   }
 );

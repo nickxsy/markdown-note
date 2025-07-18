@@ -19,6 +19,7 @@
     "lint:fix": "eslint . --fix",
     "prepare": "husky",
     "pre-commit": "lint-staged",
+    "pre-push": "npm run test",
     "storybook": "storybook dev -p 6006 --no-open",
     "build-storybook": "storybook build"
   },

@@ -9,12 +9,11 @@ import type { Note } from '@/entities/note';
 
 import { RemoveNoteButton } from '@/features/note';
 
-import { NoteItemTitleInput } from './note-item-title-input';
+import { NoteTitleInput } from '../note-title-input';
 
 export function NoteItem({ note }: { note: Note }) {
   const [isActive] = useRoute(`/note/${note.id}`);
   const deleteNoteIsEnabled = useFeatureFlag('deleteNote');
-  const editNoteIsEnabled = useFeatureFlag('editNote');
 
   const createdAt = new Date(note.createdAt).toLocaleString();
   const updatedAt = new Date(note.updatedAt).toLocaleString();
@@ -44,17 +43,7 @@ export function NoteItem({ note }: { note: Note }) {
           )}
         >
           <div className="flex flex-col">
-            {editNoteIsEnabled && <NoteItemTitleInput title={note.title} />}
-            {!editNoteIsEnabled && (
-              <Typography
-                as="span"
-                size="lg"
-                weight="medium"
-                className="line-clamp-1"
-              >
-                {note.title}
-              </Typography>
-            )}
+            <NoteTitleInput title={note.title} noteId={note.id} />
 
             {note.content && (
               <Typography as="p" size="sm" className="line-clamp-1 w-[90%]">

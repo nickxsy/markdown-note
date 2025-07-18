@@ -17,6 +17,10 @@ export function NotePage() {
     noteStore.selectors.selectNoteById(state, params.id)
   );
 
+  if (!note) {
+    return <div>Note not found</div>;
+  }
+
   return (
     <>
       <Head>
@@ -27,7 +31,7 @@ export function NotePage() {
       </Head>
       <FeatureToggler />
       <NoteLayout
-        editor={<MarkdownEditor note={note?.content || ''} />}
+        editor={<MarkdownEditor note={note} />}
         preview={<MarkdownPreview />}
       />
     </>
